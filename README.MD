@@ -39,3 +39,5 @@ This project involves building an automated weather data pipeline that collects 
 ## How to Run
 
 ## Further Enhancements.
+
+    - CI/CD, dashboards, Docker, etc
