@@ -93,14 +93,11 @@ Potential problems:
 - API downtime or slow responses
 - Partial responses
 
-
 This is crucial and directly helps to inform:
 
 - Data quality checks
 - Error handling
-- Retry logic
-
-
+- Retry logic.
 
 Deciding on What “Good Data” Means (Data Contracts)
 
@@ -126,6 +123,88 @@ Derived fields (computed later):
 - heat_index
 - comfort_level
 - is_raining
+
+## What ETL Really Means 
+
+## Extract
+
+Getting data as-is from the source
+
+### Decide Responsibilities for Each Layer
+
+Extract Layer (utils/extract.py)
+
+ - Call Open-Meteo API
+ - Handle network issues (timeouts, retries)
+ - Log success/failure
+
+
+
+### Transform Layer (utils/transform.py)
+
+ - Standardize timestamps
+ - Handle missing values
+
+Calculate:
+
+    - heat_index
+    - comfort_level
+    - is_raining
+
+Apply data quality checks:
+
+    - value ranges
+    - null checks
+    - Log number of valid vs invalid rows
+
+
+Load Layer (utils/load.py)
+
+    - Insert data into:
+    - dim_location
+    - fact_weather_hourly
+    - Enforce foreign key logic
+    - Avoid duplicates (idempotency)
+    - Log number of rows inserted
+
+
+## Deciding Where Data Quality Lives
+
+We enforce quality in two places:
+
+1️. Transform Layer
+
+- Business rules
+- Value ranges
+- Null checks
+- Logical consistency
+
+2️. Database Layer
+
+- Schema constraints
+- Foreign keys
+- Data types
+
+
+
+## Plan Error Handling & Retries
+
+### Extract Phase
+
+- Retry API calls (network issues)
+- Fail loudly after max retries
+
+### Transform Phase
+
+- Drop or quarantine bad rows
+- Fail pipeline if quality threshold breached
+
+### Load Phase
+
+- Roll back on failure
+- Prevent partial writes
+
+
 
 
 
