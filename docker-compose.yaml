@@ -1,0 +1,117 @@
+version: "3.8"
+
+services:
+
+  # =========================
+  # Airflow internal metadata DB
+  # =========================
+  airflow-postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - airflow-postgres-volume:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  # =========================
+  # ETL target database (your Hourly_Weather DB)
+  # =========================
+  etl-postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - etl-postgres-volume:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+  # =========================
+  # Initialize Airflow DB
+  # =========================
+  airflow-init:
+    image: apache/airflow:2.10.3-python3.10
+    depends_on:
+      - airflow-postgres
+    env_file:
+      - .env
+    environment:
+      AIRFLOW__CORE__EXECUTOR: ${AIRFLOW__CORE__EXECUTOR}
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: ${AIRFLOW__CORE__SQL_ALCHEMY_CONN}
+      AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW__CORE__FERNET_KEY}
+    entrypoint: airflow db init
+
+  # =========================
+  # Airflow Webserver
+  # =========================
+  airflow-webserver:
+    image: apache/airflow:2.10.3-python3.10
+    depends_on:
+      - airflow-postgres
+      - airflow-init
+      - etl-postgres
+    env_file:
+      - .env
+    environment:
+      AIRFLOW__CORE__EXECUTOR: ${AIRFLOW__CORE__EXECUTOR}
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: ${AIRFLOW__CORE__SQL_ALCHEMY_CONN}
+
+      # ETL DB connection
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./utils:/opt/airflow/utils
+      - ./airflow/logs:/opt/airflow/logs
+      - ./requirements.txt:/requirements.txt
+    command: bash -c "pip install --no-cache-dir -r /requirements.txt && airflow webserver"
+
+    ports:
+      - "8080:8080"
+
+
+  # =========================
+  # Airflow Scheduler
+  # =========================
+  airflow-scheduler:
+    image: apache/airflow:2.10.3-python3.10
+    depends_on:
+      - airflow-postgres
+      - airflow-init
+      - etl-postgres
+    env_file:
+      - .env
+    environment:
+      AIRFLOW__CORE__EXECUTOR: ${AIRFLOW__CORE__EXECUTOR}
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: ${AIRFLOW__CORE__SQL_ALCHEMY_CONN}
+
+      # ETL DB connection
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./utils:/opt/airflow/utils
+      - ./airflow/logs:/opt/airflow/logs
+      - ./requirements.txt:/requirements.txt
+
+    command: bash -c "pip install --no-cache-dir -r /requirements.txt && airflow scheduler"
+
+
+# =========================
+# Docker volumes
+# =========================
+volumes:
+  airflow-postgres-volume:
+  etl-postgres-volume:
