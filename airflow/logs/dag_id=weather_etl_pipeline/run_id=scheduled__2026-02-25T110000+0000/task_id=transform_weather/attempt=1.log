@@ -1,0 +1,63 @@
+[2026-02-25T12:00:28.624+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-02-25T12:00:28.678+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline.transform_weather scheduled__2026-02-25T11:00:00+00:00 [queued]>
+[2026-02-25T12:00:28.702+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline.transform_weather scheduled__2026-02-25T11:00:00+00:00 [queued]>
+[2026-02-25T12:00:28.705+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 3
+[2026-02-25T12:00:28.741+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): transform_weather> on 2026-02-25 11:00:00+00:00
+[2026-02-25T12:00:28.780+0000] {standard_task_runner.py:72} INFO - Started process 2294 to run task
+[2026-02-25T12:00:28.798+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_etl_pipeline', 'transform_weather', 'scheduled__2026-02-25T11:00:00+00:00', '--job-id', '136', '--raw', '--subdir', 'DAGS_FOLDER/weather_pipeline_dag.py', '--cfg-path', '/tmp/tmp_hm4eosj']
+[2026-02-25T12:00:28.805+0000] {standard_task_runner.py:105} INFO - Job 136: Subtask transform_weather
+[2026-02-25T12:00:29.021+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_etl_pipeline.transform_weather scheduled__2026-02-25T11:00:00+00:00 [running]> on host 6f0248ee75a6
+[2026-02-25T12:00:29.275+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_pipeline' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline' AIRFLOW_CTX_TASK_ID='transform_weather' AIRFLOW_CTX_EXECUTION_DATE='2026-02-25T11:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-25T11:00:00+00:00'
+[2026-02-25T12:00:29.280+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-02-25T12:00:29.464+0000] {transform.py:9} INFO - Starting transformation process
+[2026-02-25T12:00:29.524+0000] {transform.py:17} INFO - Dropped 0 rows with invalid timestamps
+[2026-02-25T12:00:29.533+0000] {transform.py:27} INFO - Records after cleaning: 504
+[2026-02-25T12:00:29.544+0000] {transform.py:38} INFO - Transformation and enrichment completed
+[2026-02-25T12:00:29.620+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-02-25T12:00:29.655+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-02-25T12:00:29.660+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline, task_id=transform_weather, run_id=scheduled__2026-02-25T11:00:00+00:00, execution_date=20260225T110000, start_date=20260225T120028, end_date=20260225T120029
+[2026-02-25T12:00:29.784+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-02-25T12:00:29.887+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-02-25T12:00:29.895+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2026-02-25T12:09:24.321+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-02-25T12:09:24.388+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline.transform_weather scheduled__2026-02-25T11:00:00+00:00 [queued]>
+[2026-02-25T12:09:24.417+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline.transform_weather scheduled__2026-02-25T11:00:00+00:00 [queued]>
+[2026-02-25T12:09:24.421+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 3
+[2026-02-25T12:09:24.462+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): transform_weather> on 2026-02-25 11:00:00+00:00
+[2026-02-25T12:09:24.494+0000] {standard_task_runner.py:72} INFO - Started process 2947 to run task
+[2026-02-25T12:09:24.515+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_etl_pipeline', 'transform_weather', 'scheduled__2026-02-25T11:00:00+00:00', '--job-id', '148', '--raw', '--subdir', 'DAGS_FOLDER/weather_pipeline_dag.py', '--cfg-path', '/tmp/tmpc5xnlitd']
+[2026-02-25T12:09:24.522+0000] {standard_task_runner.py:105} INFO - Job 148: Subtask transform_weather
+[2026-02-25T12:09:24.785+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_etl_pipeline.transform_weather scheduled__2026-02-25T11:00:00+00:00 [running]> on host 6f0248ee75a6
+[2026-02-25T12:09:25.064+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_pipeline' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline' AIRFLOW_CTX_TASK_ID='transform_weather' AIRFLOW_CTX_EXECUTION_DATE='2026-02-25T11:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-25T11:00:00+00:00'
+[2026-02-25T12:09:25.070+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-02-25T12:09:25.308+0000] {transform.py:9} INFO - Starting transformation process
+[2026-02-25T12:09:25.392+0000] {transform.py:17} INFO - Dropped 0 rows with invalid timestamps
+[2026-02-25T12:09:25.401+0000] {transform.py:27} INFO - Records after cleaning: 504
+[2026-02-25T12:09:25.414+0000] {transform.py:38} INFO - Transformation and enrichment completed
+[2026-02-25T12:09:25.561+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-02-25T12:09:25.623+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-02-25T12:09:25.627+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline, task_id=transform_weather, run_id=scheduled__2026-02-25T11:00:00+00:00, execution_date=20260225T110000, start_date=20260225T120924, end_date=20260225T120925
+[2026-02-25T12:09:25.736+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-02-25T12:09:25.811+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-02-25T12:09:25.819+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
+[2026-02-25T12:44:13.268+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-02-25T12:44:13.297+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline.transform_weather scheduled__2026-02-25T11:00:00+00:00 [queued]>
+[2026-02-25T12:44:13.309+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline.transform_weather scheduled__2026-02-25T11:00:00+00:00 [queued]>
+[2026-02-25T12:44:13.311+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 3
+[2026-02-25T12:44:13.330+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): transform_weather> on 2026-02-25 11:00:00+00:00
+[2026-02-25T12:44:13.350+0000] {standard_task_runner.py:72} INFO - Started process 4252 to run task
+[2026-02-25T12:44:13.357+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_etl_pipeline', 'transform_weather', 'scheduled__2026-02-25T11:00:00+00:00', '--job-id', '158', '--raw', '--subdir', 'DAGS_FOLDER/weather_pipeline_dag.py', '--cfg-path', '/tmp/tmp9jm26o77']
+[2026-02-25T12:44:13.360+0000] {standard_task_runner.py:105} INFO - Job 158: Subtask transform_weather
+[2026-02-25T12:44:13.466+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_etl_pipeline.transform_weather scheduled__2026-02-25T11:00:00+00:00 [running]> on host 6f0248ee75a6
+[2026-02-25T12:44:13.613+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_pipeline' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline' AIRFLOW_CTX_TASK_ID='transform_weather' AIRFLOW_CTX_EXECUTION_DATE='2026-02-25T11:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-25T11:00:00+00:00'
+[2026-02-25T12:44:13.616+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-02-25T12:44:13.817+0000] {transform.py:9} INFO - Starting transformation process
+[2026-02-25T12:44:13.894+0000] {transform.py:17} INFO - Dropped 0 rows with invalid timestamps
+[2026-02-25T12:44:13.899+0000] {transform.py:27} INFO - Records after cleaning: 504
+[2026-02-25T12:44:13.908+0000] {transform.py:38} INFO - Transformation and enrichment completed
+[2026-02-25T12:44:14.039+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-02-25T12:44:14.059+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-02-25T12:44:14.061+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline, task_id=transform_weather, run_id=scheduled__2026-02-25T11:00:00+00:00, execution_date=20260225T110000, start_date=20260225T124413, end_date=20260225T124414
+[2026-02-25T12:44:14.215+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-02-25T12:44:14.265+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-02-25T12:44:14.270+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

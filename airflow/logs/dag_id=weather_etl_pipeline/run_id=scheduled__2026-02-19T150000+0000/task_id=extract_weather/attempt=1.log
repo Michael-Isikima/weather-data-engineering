@@ -1,0 +1,23 @@
+[2026-02-19T16:49:45.877+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-02-19T16:49:45.940+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: weather_etl_pipeline.extract_weather scheduled__2026-02-19T15:00:00+00:00 [queued]>
+[2026-02-19T16:49:45.970+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: weather_etl_pipeline.extract_weather scheduled__2026-02-19T15:00:00+00:00 [queued]>
+[2026-02-19T16:49:45.974+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 3
+[2026-02-19T16:49:46.014+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_weather> on 2026-02-19 15:00:00+00:00
+[2026-02-19T16:49:46.063+0000] {standard_task_runner.py:72} INFO - Started process 947 to run task
+[2026-02-19T16:49:46.175+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'weather_etl_pipeline', 'extract_weather', 'scheduled__2026-02-19T15:00:00+00:00', '--job-id', '29', '--raw', '--subdir', 'DAGS_FOLDER/weather_pipeline_dag.py', '--cfg-path', '/tmp/tmp9jh2ewpd']
+[2026-02-19T16:49:46.239+0000] {standard_task_runner.py:105} INFO - Job 29: Subtask extract_weather
+[2026-02-19T16:49:46.952+0000] {task_command.py:467} INFO - Running <TaskInstance: weather_etl_pipeline.extract_weather scheduled__2026-02-19T15:00:00+00:00 [running]> on host 20d22796c30b
+[2026-02-19T16:49:47.503+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='weather_pipeline' AIRFLOW_CTX_DAG_ID='weather_etl_pipeline' AIRFLOW_CTX_TASK_ID='extract_weather' AIRFLOW_CTX_EXECUTION_DATE='2026-02-19T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-19T15:00:00+00:00'
+[2026-02-19T16:49:47.509+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2026-02-19T16:49:47.670+0000] {extract.py:29} INFO - Starting extraction for Lagos
+[2026-02-19T16:49:50.145+0000] {extract.py:53} INFO - Lagos: Extracted 168 records
+[2026-02-19T16:49:50.147+0000] {extract.py:29} INFO - Starting extraction for London
+[2026-02-19T16:49:51.989+0000] {extract.py:53} INFO - London: Extracted 168 records
+[2026-02-19T16:49:51.990+0000] {extract.py:29} INFO - Starting extraction for New York
+[2026-02-19T16:49:53.867+0000] {extract.py:53} INFO - New York: Extracted 168 records
+[2026-02-19T16:49:54.019+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-02-19T16:49:54.042+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2026-02-19T16:49:54.044+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=weather_etl_pipeline, task_id=extract_weather, run_id=scheduled__2026-02-19T15:00:00+00:00, execution_date=20260219T150000, start_date=20260219T164945, end_date=20260219T164954
+[2026-02-19T16:49:54.100+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2026-02-19T16:49:54.141+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-02-19T16:49:54.146+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
