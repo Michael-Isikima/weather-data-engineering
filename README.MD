@@ -1,40 +1,61 @@
 ## Global Weather Analytics Pipeline
 
-This project involves building an automated weather data pipeline that collects hourly data from a public API, transforms and cleans it to ensure reliability, and stores it in a PostgreSQL database for efficient querying. The pipeline will be orchestrated using Apache Airflow, incorporating robust data quality checks, comprehensive logging, and error handling to maintain reliability and traceability. The entire project will be version-controlled with Git and GitHub, with CI/CD workflows in place to enable smooth, automated deployment and updates.
+This project involves building an automated weather data pipeline that collects hourly data from a public API, transforms and cleans it to ensure reliability, and stores it in a PostgreSQL database for efficient querying. The pipeline will be orchestrated using Apache Airflow, incorporating robust data quality checks, comprehensive logging, and error handling to maintain reliability and traceability. The entire project will be version-controlled with Git and GitHub, with Docker for containerization, ensuring consistent environments, simplified deployment, and seamless integration between services such as Airflow and PostgreSQL.
+## Architecture Overview
+
+![Weather Pipeline Architecture](images/Architecture_Diagram.png)
+
+
 
 ## Data source
 
-    - Open-Meteo API
+- Open-Meteo API
 
 ## Pipeline Features
 
-    - Hourly extraction of weather data from Open-Meteo API
+- Hourly extraction of weather data from Open-Meteo API
 
-    - Transformation: clean, enrich, create derived columns (heat_index,    comfort_level, is_raining)
+- Transformation: clean, enrich, create derived columns (heat_index,    comfort_level, is_raining)
 
-    - Loading into PostgreSQL with dimension & fact tables.
+- Loading into PostgreSQL with dimension & fact tables.
 
-    - Automated Airflow DAG for orchestration
+- Automated Airflow DAG for orchestration
 
-    - Logging and retry mechanisms for reliability
+- Logging and retry mechanisms for reliability
 
-    - Data quality checks (validate temperature, humidity, timestamps)
+- Data quality checks (validate temperature, humidity, timestamps)
 
-    - Version control with Git/GitHub
+- Version control with Git/GitHub
 
-    - CI/CD for testing and linting
+- CI/CD for testing and linting
 
-## Folder Structure
+## Folder 
 
-    - weather-data-engineering/
-        ├── dags/
-        ├── utils/
-        ├── sql/
-        ├── scripts/
-        ├── data/
-        ├── docker/
-        ├── README.md
-        └── requirements.txt
+```
+weather-data-engineering/
+├── airflow/
+│ ├── dags/
+│ │ ├── utils/
+│ │ │ ├── data_quality.py
+│ │ │ ├── db.py
+│ │ │ ├── extract.py
+│ │ │ ├── load.py
+│ │ │ ├── logger.py
+│ │ │ └── transform.py
+│ │ └── weather_pipeline_dag.py
+│ ├── logs/
+│ └── plugins/
+├── sql/
+│ └── Hourly_Weather.sql
+├── Images/
+├      └──Architecture_Diagram.png 
+├── .env
+├── docker-compose.yaml
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
+
 
 ## Understanding and Exploring choice API
 
@@ -147,25 +168,25 @@ Extract Layer (utils/extract.py)
 
 Calculate:
 
-    - heat_index
-    - comfort_level
-    - is_raining
+- heat_index
+- comfort_level
+- is_raining
 
 Apply data quality checks:
 
-    - value ranges
-    - null checks
-    - Log number of valid vs invalid rows
+- value ranges
+- null checks
+- Log number of valid vs invalid rows
 
 
 Load Layer (utils/load.py)
 
-    - Insert data into:
-    - dim_location
-    - fact_weather_hourly
-    - Enforce foreign key logic
-    - Avoid duplicates (idempotency)
-    - Log number of rows inserted
+- Insert data into:
+- dim_location
+- fact_weather_hourly
+- Enforce foreign key logic
+- Avoid duplicates (idempotency)
+- Log number of rows inserted
 
 
 ## Deciding Where Data Quality Lives
@@ -206,10 +227,71 @@ We enforce quality in two places:
 
 
 
-
-
 ## How to Run
+
+How to Run the Project
+### Prerequisites
+
+Ensure you have the following installed:
+
+- Docker
+
+- Docker Compose
+
+- Git
+
+## Clone the Repository
+clone the repo into your local machine
+
+## Configure Environment Variables
+
+Create a .env file in the root directory and add:
+
+- DB_USER=your_db_user
+- DB_PASSWORD=your_db_password
+- DB_NAME=your_db_name
+
+
+## Start All Services with Docker
+docker-compose up --build
+
+
+This will start:
+
+- Airflow Webserver
+
+- Airflow Scheduler
+
+- PostgreSQL Database
+
+## Access Airflow UI
+
+Open your browser and go to:
+
+http://localhost:8080
+
+
+Login with your Airflow credentials.
+
+## Trigger the DAG
+
+- Locate weather_pipeline_dag
+
+- Enable the DAG
+
+- Trigger manually or wait for scheduled run
+
+## Stop the Services
+
+To stop all containers:
 
 ## Further Enhancements.
 
-    - CI/CD, dashboards, Docker, etc
+    - CI/CD, dashboards, etc
+
+
+
+
+
+
+
