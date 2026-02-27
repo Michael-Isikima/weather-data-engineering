@@ -3,7 +3,7 @@
 This project involves building an automated weather data pipeline that collects hourly data from a public API, transforms and cleans it to ensure reliability, and stores it in a PostgreSQL database for efficient querying. The pipeline will be orchestrated using Apache Airflow, incorporating robust data quality checks, comprehensive logging, and error handling to maintain reliability and traceability. The entire project will be version-controlled with Git and GitHub, with Docker for containerization, ensuring consistent environments, simplified deployment, and seamless integration between services such as Airflow and PostgreSQL.
 ## Architecture Overview
 
-![Weather Pipeline Architecture](images/Architecture_Diagram.png)
+![Weather Pipeline Architecture](Images/Architecture_Diagram.png)
 
 
 
